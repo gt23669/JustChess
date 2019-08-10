@@ -7,6 +7,6 @@
 
     public interface IGameInitializationStrategy
     {
-        void Initialize(IList<IPlayer> players, IBoard board);
+        void Initialize(IList<IPlayer> players, IBoard board, bool chess960);
     }
 }

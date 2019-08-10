@@ -7,7 +7,7 @@
     {
         IEnumerable<IPlayer> Players { get; }
 
-        void Initialize(IGameInitializationStrategy gameInitializationStrategy);
+        void Initialize(IGameInitializationStrategy gameInitializationStrategy, bool chess960);
 
         void Start();
 

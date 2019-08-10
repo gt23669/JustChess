@@ -42,18 +42,18 @@
             }
         }
 
-        public void Initialize(IGameInitializationStrategy gameInitializationStrategy)
+        public void Initialize(IGameInitializationStrategy gameInitializationStrategy, bool chess960)
         {
             // TODO: remove using JustChess.Players and use the input for players
             // TODO: BUG: if players are changed - board is reversed
-            this.players = new List<IPlayer> 
+            this.players = new List<IPlayer>
             {
                 new Player("Gosho", ChessColor.Black),
                 new Player("Pesho", ChessColor.White)
             }; // this.input.GetPlayers(GlobalConstants.StandardGameNumberOfPlayers);
 
             this.SetFirstPlayerIndex();
-            gameInitializationStrategy.Initialize(this.players, this.board);
+            gameInitializationStrategy.Initialize(this.players, this.board, chess960);
             this.renderer.RenderBoard(this.board);
         }
 

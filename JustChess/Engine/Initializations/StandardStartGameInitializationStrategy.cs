@@ -31,18 +31,18 @@
             };
         }
 
-        public void Initialize(IList<IPlayer> players, IBoard board)
+        public void Initialize(IList<IPlayer> players, IBoard board, bool chess960)
         {
             this.ValidateStrategy(players, board);
 
             var firstPlayer = players[0];
             var secondPlayer = players[1];
 
-            this.AddArmyToBoardRow(firstPlayer, board, 8);
+            this.AddArmyToBoardRow(firstPlayer, board, 8, chess960);
             this.AddPawnsToBoardRow(firstPlayer, board, 7);
 
             this.AddPawnsToBoardRow(secondPlayer, board, 2);
-            this.AddArmyToBoardRow(secondPlayer, board, 1);
+            this.AddArmyToBoardRow(secondPlayer, board, 1, chess960);
         }
 
         private void AddPawnsToBoardRow(IPlayer player, IBoard board, int chessRow)
@@ -56,8 +56,12 @@
             }
         }
 
-        private void AddArmyToBoardRow(IPlayer player, IBoard board, int chessRow)
+        private void AddArmyToBoardRow(IPlayer player, IBoard board, int chessRow, bool chess960)
         {
+            if (chess960)
+            {
+                RandomizeList();
+            }
             for (int i = 0; i < BoardTotalRowsAndCols; i++)
             {
                 var figureType = this.figureTypes[i];

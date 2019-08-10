@@ -11,6 +11,13 @@
     {
         public static void Start()
         {
+            Console.WriteLine("Would you like to play Chess960?(y/n)");
+            string input = Console.ReadLine();
+            bool chess960 = false;
+            if (input.ToLower() == "y")
+            {
+                chess960 = true;
+            }
             var renderer = new ConsoleRenderer();
             //// renderer.RenderMainMenu();
 
@@ -20,7 +27,7 @@
 
             var gameInitializationStrategy = new StandardStartGameInitializationStrategy();
 
-            chessEngine.Initialize(gameInitializationStrategy);
+            chessEngine.Initialize(gameInitializationStrategy, chess960);
             chessEngine.Start();
 
             Console.ReadLine();
