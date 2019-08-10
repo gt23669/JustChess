@@ -60,7 +60,7 @@
         {
             if (chess960)
             {
-                RandomizeList();
+                //RandomizeList();
             }
             for (int i = 0; i < BoardTotalRowsAndCols; i++)
             {
