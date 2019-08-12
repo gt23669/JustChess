@@ -19,7 +19,7 @@
                 chess960 = true;
             }
             var renderer = new ConsoleRenderer();
-            //// renderer.RenderMainMenu();
+            renderer.RenderMainMenu();
 
             var inputProvider = new ConsoleInputProvider();
 

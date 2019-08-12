@@ -14,7 +14,7 @@
     {
         private const int BoardTotalRowsAndCols = 8;
 
-        private readonly IList<Type> figureTypes;
+        private IList<Type> figureTypes;
 
         public StandardStartGameInitializationStrategy()
         {
@@ -60,7 +60,7 @@
         {
             if (chess960)
             {
-                //RandomizeList();
+                RandomizeList();
             }
             for (int i = 0; i < BoardTotalRowsAndCols; i++)
             {
@@ -70,6 +70,37 @@
                 var position = new Position(chessRow, (char)(i + 'a'));
                 board.AddFigure(figureInstance, position);
             }
+        }
+
+        private void RandomizeList()
+        {
+            Type[] temp = new Type[8];
+            Random rnd = new Random();
+            int left = rnd.Next(0, 3);
+            int right = rnd.Next(5, 7);
+            int kingIndex = rnd.Next(left + 1, right - 1);
+
+            temp[left] = typeof(Rook);
+            temp[right] = typeof(Rook);
+
+            for (int i = 0; i < this.figureTypes.Count; i++)
+            {
+                if (this.figureTypes[i] == typeof(Rook))
+                {
+                    this.figureTypes.RemoveAt(i);
+                }
+            }
+
+            for (int i = 0, j = 0; i < this.figureTypes.Count; i++)
+            {
+                while (temp[j] != null)
+                {
+                    j++;
+                }
+                temp[j] = figureTypes[i];
+            }
+
+            this.figureTypes = new List<Type>(temp);
         }
 
         private void ValidateStrategy(ICollection<IPlayer> players, IBoard board)
