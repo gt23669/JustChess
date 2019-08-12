@@ -49,6 +49,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Chess960Test.cs" />
     <Compile Include="InputProviders\MockInputProvider.cs" />
     <Compile Include="InputProviders\MockInputProviderWithMove.cs" />
     <Compile Include="Renderers\MockConsoleRenderer.cs" />
