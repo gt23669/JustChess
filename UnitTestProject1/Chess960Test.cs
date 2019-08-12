@@ -83,5 +83,24 @@ namespace UnitTestProject1
 
             Assert.IsFalse(same);
         }
+
+        [TestMethod]
+        public void ValidMovePawn()
+        {
+            var inputProvider = new MockInputProviderWithMove("a2-a3");
+            var standardTwoPlayerEngine = new StandardTwoPlayerEngine(renderer, inputProvider, testing);
+            standardTwoPlayerEngine.Initialize(gameInitializationStrategy, true);
+
+            PrivateObject chessEngine = new PrivateObject(standardTwoPlayerEngine);
+            IBoard board = chessEngine.GetField("board") as Board;
+            var figure = board.GetFigureAtPosition(Position.FromChessCoordinates(3, 'a'));
+            Assert.IsNull(figure);
+
+            standardTwoPlayerEngine.Start();
+
+            figure = board.GetFigureAtPosition(Position.FromChessCoordinates(3, 'a'));
+            Assert.IsNotNull(figure);
+            Assert.IsTrue(figure.GetType() == typeof(Pawn));
+        }
     }
 }
