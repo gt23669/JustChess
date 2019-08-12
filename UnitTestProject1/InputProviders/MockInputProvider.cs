@@ -1,7 +1,5 @@
 ﻿using JustChess.Common;
-using JustChess.Common.Console;
 using JustChess.InputProviders.Contracts;
-using JustChess.Players;
 using JustChess.Players.Contracts;
 using System;
 using System.Collections.Generic;
@@ -13,24 +11,14 @@ namespace UnitTestProject1.InputProviders
 {
     public class MockInputProvider : IInputProvider
     {
-        public string Move { get; set; }
-
-        public MockInputProvider(string move)
-        {
-            this.Move = move;
-        }
         public Move GetNextPlayerMove(IPlayer player)
         {
-            return ConsoleHelpers.CreateMoveFromCommand(Move);
+            throw new NotImplementedException();
         }
 
         public IList<IPlayer> GetPlayers(int numberOfPlayers)
         {
-            return new List<IPlayer>
-            {
-                new Player("Fermin", ChessColor.White),
-                new Player("Bot", ChessColor.Black)
-            };
+            throw new NotImplementedException();
         }
     }
 }
