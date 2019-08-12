@@ -21,17 +21,19 @@
         private readonly IInputProvider input;
         private readonly IBoard board;
         private readonly IMovementStrategy movementStrategy;
+        private readonly bool testing;
 
         private IList<IPlayer> players;
 
         private int currentPlayerIndex;
 
-        public StandardTwoPlayerEngine(IRenderer renderer, IInputProvider inputProvider)
+        public StandardTwoPlayerEngine(IRenderer renderer, IInputProvider inputProvider, bool testing = false)
         {
             this.renderer = renderer;
             this.input = inputProvider;
             this.movementStrategy = new NormalMovementStrategy();
             this.board = new Board();
+            this.testing = testing;
         }
 
         public IEnumerable<IPlayer> Players
@@ -59,7 +61,7 @@
 
         public void Start()
         {
-            while (true)
+            do
             {
                 IFigure figure = null;
                 try
@@ -88,9 +90,9 @@
                 catch (Exception ex)
                 {
                     this.currentPlayerIndex--;
-                    this.renderer.PrintErrorMessage(string.Format(ex.Message, figure.GetType().Name));
+                    this.renderer.PrintErrorMessage(string.Format(ex.Message, figure?.GetType().Name));
                 }
-            }
+            } while (!testing);
         }
 
         public void WinningConditions()
